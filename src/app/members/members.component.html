@@ -1,0 +1,45 @@
+<div class="cards-container">
+  <div class="searchbar">
+    <input type="text" placeholder="Search by Name" [(ngModel)]="search" />
+  </div>
+  <div class="searchbar2">
+    <input
+      type="text"
+      placeholder="Search by Zip Code"
+      [(ngModel)]="searchZip"
+    />
+  </div>
+  <div class="searchbar3">
+    <input type="text" placeholder="Search by Age" [(ngModel)]="searchAge" />
+  </div>
+  <div class="searchbar4">
+    <input
+      type="text"
+      placeholder="Search by Country"
+      [(ngModel)]="searchCountry"
+    />
+  </div>
+  <ng-container
+    *ngFor="
+      let person of members
+        | search: search
+        | searchZip: searchZip
+        | searchAge: searchAge
+        | searchCountry: searchCountry
+    "
+  >
+    <div
+      class="member-container"
+      (click)="setMemberProfile(person)"
+      routerLink="/profile"
+    >
+      <div class="member-pic">
+        <img src="{{ person.picture.medium }}" alt="" />
+      </div>
+      <div class="member-name">
+        Name: {{ person.name.last }}, {{ person.name.first }}
+      </div>
+      <div class="member-age">Age: {{ person.dob.age }}</div>
+    </div>
+  </ng-container>
+</div>
